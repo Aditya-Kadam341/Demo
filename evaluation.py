@@ -8,28 +8,33 @@ tag = "P" # Single label
 
 ########## Function to get tp,fp,fn,tn values ##########
 def matrix_values(y_true,y_pred,label): # check position of parameter
-    # initialize variables 
-    true_positive = 0
-    true_negative = 0
-    false_negative = 0
-    false_positive = 0
-    if (len(y_true)) == (len(y_pred)):          # procceed only if the length is the same
-        for i in range(len(y_true)):
-            if (y_true[i] == label ) and (y_pred[i] == label):
-                true_positive = true_positive+1             # if conditions met then increment true_positive by 1
-            elif (y_true[i] == label ) and  (y_pred[i] != label):
-                false_negative = false_negative+1           # if conditions met then increment false_negative by 1
-            elif (y_true[i] != label ) and  (y_pred[i] == label):
-                false_positive = false_positive+1           # if conditions met then increment false_positive by 1
-            elif (y_true[i] != label ) and  (y_pred[i] != label):
-                true_negative=true_negative+1               # if conditions met then increment true_negative by 1
-    else:
-        print("******\nTHE LENGTH OF CORRECT and PREDICTED LIST IS DIFFERENT\n*****")
-    # print("True positive1",true_positive)
-    # print("False positive1",false_positive)
-    # print("False negative1",false_negative)
-    # print("True negative1",true_negative)
-    return [[true_positive, false_positive],[false_negative,true_negative]]
+    each_tag = {} 
+    for j in range (len(label)):
+        # initialize variables 
+        true_positive = 0
+        true_negative = 0
+        false_negative = 0
+        false_positive = 0
+        
+        if (len(y_true)) == (len(y_pred)):          # procceed only if the length is the same
+            for i in range(len(y_true)):
+                if (y_true[i] == label[j] ) and (y_pred[i] == label[j]):
+                    true_positive = true_positive+1             # if conditions met then increment true_positive by 1
+                elif (y_true[i] == label[j] ) and  (y_pred[i] != label[j]):
+                    false_negative = false_negative+1           # if conditions met then increment false_negative by 1
+                elif (y_true[i] != label[j] ) and  (y_pred[i] == label[j]):
+                    false_positive = false_positive+1           # if conditions met then increment false_positive by 1
+                elif (y_true[i] != label[j] ) and  (y_pred[i] != label[j]):
+                    true_negative=true_negative+1               # if conditions met then increment true_negative by 1
+        else:
+            print("******\nTHE LENGTH OF CORRECT and PREDICTED LIST IS DIFFERENT\n*****")
+        each_tag[label[j]] = [[true_positive, false_positive],[false_negative,true_negative]]
+        # print("True positive1",true_positive)
+        # print("False positive1",false_positive)
+        # print("False negative1",false_negative)
+        # print("True negative1",true_negative)
+            
+    return each_tag
 ########## Function to get tp,fp,fn,tn values ##########
 
 
