@@ -1,7 +1,9 @@
 ########## Temporary Data ##########
-true_tags = ["NN", "DT", "P", "HYP", "NN", "P", "DT"] #correct(GoldStandard data)
-dummy_tags = ["NN", "VB", "P", "P", "DT", "P", "HYP"]  #predicted(Dummy data)
-tag = "P" # Single label
+# true_tags = ["NN", "DT", "P", "HYP", "NN", "P", "DT"] #correct(GoldStandard data)
+# dummy_tags = ["NN", "VB", "P", "P", "DT", "P", "HYP"]  #predicted(Dummy data)
+true_tags = ["NN", "DT", "P", "HYP"] #correct(GoldStandard data)
+dummy_tags = ["NN", "VB", "P", "P"]  #predicted(Dummy data)
+tag = "NN" # Single label
 ########## Temporary Data ##########
 
 
@@ -18,13 +20,13 @@ def matrix_values(y_true,y_pred,label): # check position of parameter
         
         if (len(y_true)) == (len(y_pred)):          # procceed only if the length is the same
             for i in range(len(y_true)):
-                if (y_true[i] == label[j] ) and (y_pred[i] == label[j]):
+                if (y_true[i] == label[j]) and (y_pred[i] == label[j]):
                     true_positive = true_positive+1             # if conditions met then increment true_positive by 1
-                elif (y_true[i] == label[j] ) and  (y_pred[i] != label[j]):
+                elif (y_true[i] == label[j]) and (y_pred[i] != label[j]):
                     false_negative = false_negative+1           # if conditions met then increment false_negative by 1
-                elif (y_true[i] != label[j] ) and  (y_pred[i] == label[j]):
+                elif (y_true[i] != label[j]) and (y_pred[i] == label[j]):
                     false_positive = false_positive+1           # if conditions met then increment false_positive by 1
-                elif (y_true[i] != label[j] ) and  (y_pred[i] != label[j]):
+                elif (y_true[i] != label[j]) and (y_pred[i] != label[j]):
                     true_negative=true_negative+1               # if conditions met then increment true_negative by 1
         else:
             print("******\nTHE LENGTH OF CORRECT and PREDICTED LIST IS DIFFERENT\n*****")
@@ -46,16 +48,20 @@ def matrix_values(y_true,y_pred,label): # check position of parameter
 ########## Function to calculate Precision & Recall ##########
 def calculate_precision_recall(y_true,y_pred,label):
     values = matrix_values(y_true,y_pred,label)             # call matrix_values to get tp,fp,fn,tn values
+    PrecisionDict = {}
+    RecallDict = {}
+    Final_values = {"Precision":PrecisionDict, "Recall":RecallDict}
+    for i in values:
     # Formula for Precision & Recall 
-    Precision = values[[0][0]][0]/(values[[0][0]][0]+values[[0][0]][1])  #since i stored it in nested list/array this is how we get the values 
-    Recall = values[[0][0]][0]/(values[[0][0]][0]+values[[1][0]][0])    
+        PrecisionDict[i] = values[i][[0][0]][0]/(values[i][[0][0]][0]+values[i][[0][0]][1])  #since i stored it in nested list/array this is how we get the values 
+        RecallDict[i] = values[i][[0][0]][0]/(values[i][[0][0]][0]+values[i][[1][0]][0])    
     # print("True negative",values[[1][0]][1]) 
-    return Precision,Recall
+    return Final_values
 ########## Function to calculate Precision & Recall ##########
 
 
 
-# print(calculate_precision_recall(true_tags,dummy_tags,tag)) #testing function calculate_precision_recall
+print(calculate_precision_recall(true_tags,dummy_tags,tag)) #testing function calculate_precision_recall
 
 
 
@@ -68,7 +74,7 @@ def calculate_f1score(y_true,y_pred,label):
 
 
 
-print(calculate_f1score(true_tags,dummy_tags,tag)) #testing function calculate_f1score
+# print(calculate_f1score(true_tags,dummy_tags,tag)) #testing function calculate_f1score
 
 
 
