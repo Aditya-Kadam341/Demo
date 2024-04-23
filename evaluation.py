@@ -1,6 +1,6 @@
 ########## Temporary Data ##########
-true_tags = ["NN", "DT", "P", "HYP"] #correct(GoldStandard data)
-dummy_tags = ["NN", "VB", "P", "P"]  #predicted(Dummy data)
+true_tags = ["NN", "DT", "P", "HYP", "NN", "P", "DT"] #correct(GoldStandard data)
+dummy_tags = ["NN", "VB", "P", "P", "DT", "P", "HYP"]  #predicted(Dummy data)
 tag = "P" # Single label
 ########## Temporary Data ##########
 
@@ -34,7 +34,7 @@ def matrix_values(y_true,y_pred,label): # check position of parameter
 
 
 
-print(matrix_values(true_tags,dummy_tags,tag)) #testing function matrix_values
+# print(matrix_values(true_tags,dummy_tags,tag)) #testing function matrix_values
 
 
 
@@ -50,7 +50,7 @@ def calculate_precision_recall(y_true,y_pred,label):
 
 
 
-print(calculate_precision_recall(true_tags,dummy_tags,tag)) #testing function calculate_precision_recall
+# print(calculate_precision_recall(true_tags,dummy_tags,tag)) #testing function calculate_precision_recall
 
 
 
@@ -67,3 +67,14 @@ print(calculate_f1score(true_tags,dummy_tags,tag)) #testing function calculate_f
 
 
 
+########## Function to calculate Macro F1_Score ##########
+# def macro_average(y_true,y_pred,label):
+#     calculate_f1score(y_true,y_pred,label)
+########## Function to calculate Macro F1_Score ##########
+
+
+
+########## Function to calculate Micro F1_Score ##########
+# def micro_average(y_true,y_pred,label):
+#     calculate_f1score(y_true,y_pred,label)
+########## Function to calculate Micro F1_Score ##########
