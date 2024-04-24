@@ -103,4 +103,4 @@ def micro_average(y_true,y_pred,label):
 
 
 
-print(micro_average(true_tags,dummy_tags,tag)) #testing function macro_average
+# print(micro_average(true_tags,dummy_tags,tag)) #testing function macro_average
